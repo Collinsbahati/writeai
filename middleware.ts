@@ -9,13 +9,13 @@ export async function middleware(req: NextRequest) {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        get(name) { return req.cookies.get(name)?.value },
-        set(name, value, options) {
+        get(name: string) { return req.cookies.get(name)?.value },
+        set(name: string, value: string, options: any) {
           req.cookies.set({ name, value, ...options })
           response = NextResponse.next({ request: { headers: req.headers } })
           response.cookies.set({ name, value, ...options })
         },
-        remove(name, options) {
+        remove(name: string, options: any) {
           req.cookies.set({ name, value: '', ...options })
           response = NextResponse.next({ request: { headers: req.headers } })
           response.cookies.set({ name, value: '', ...options })
@@ -26,12 +26,10 @@ export async function middleware(req: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser()
 
-  // Protect dashboard
   if (req.nextUrl.pathname.startsWith('/dashboard') && !user) {
     return NextResponse.redirect(new URL('/login', req.url))
   }
 
-  // Redirect logged-in users away from auth pages
   if ((req.nextUrl.pathname === '/login' || req.nextUrl.pathname === '/signup') && user) {
     return NextResponse.redirect(new URL('/dashboard', req.url))
   }
