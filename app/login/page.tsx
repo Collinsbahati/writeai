@@ -18,9 +18,17 @@ export default function LoginPage() {
     e.preventDefault()
     setLoading(true)
     setError('')
+
     const { error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) { setError(error.message); setLoading(false) }
-    else router.push('/dashboard')
+
+    if (error) {
+      setError(error.message)
+      setLoading(false)
+      return
+    }
+
+    router.push('/dashboard')
+    router.refresh()
   }
 
   async function handleGoogleLogin() {
@@ -30,7 +38,10 @@ export default function LoginPage() {
       provider: 'google',
       options: { redirectTo: `${window.location.origin}/auth/callback` },
     })
-    if (error) { setError(error.message); setGoogleLoading(false) }
+    if (error) {
+      setError(error.message)
+      setGoogleLoading(false)
+    }
   }
 
   return (
@@ -51,6 +62,7 @@ export default function LoginPage() {
 
           {/* Google Button */}
           <button
+            type="button"
             onClick={handleGoogleLogin}
             disabled={googleLoading || loading}
             className="w-full flex items-center justify-center gap-3 bg-white hover:bg-gray-100 disabled:opacity-50 py-3 rounded-lg font-semibold text-gray-800 transition"
@@ -96,7 +108,9 @@ export default function LoginPage() {
               />
             </div>
             <div className="text-right">
-              <a href="/forgot-password" className="text-xs text-gray-500 hover:text-indigo-400">Forgot password?</a>
+              <Link href="/forgot-password" className="text-xs text-gray-500 hover:text-indigo-400">
+                Forgot password?
+              </Link>
             </div>
             <button
               type="submit"
@@ -109,7 +123,7 @@ export default function LoginPage() {
         </div>
 
         <p className="text-center text-gray-400 mt-4 text-sm">
-          Don't have an account?{' '}
+          Don&apos;t have an account?{' '}
           <Link href="/signup" className="text-indigo-400 hover:text-indigo-300">Sign up free</Link>
         </p>
       </div>
