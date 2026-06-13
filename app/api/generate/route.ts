@@ -15,7 +15,7 @@ const PROMPTS: Record<string, string> = {
 
 export async function POST(req: NextRequest) {
   try {
-    const supabase = createClient()
+    const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
 
@@ -37,7 +37,6 @@ export async function POST(req: NextRequest) {
     await incrementUsage(user.id)
     const content = completion.choices[0]?.message?.content || ''
     const newUsage = { count: usageData.count + 1, limit: usageData.limit }
-
     return NextResponse.json({ content, usage: newUsage })
   } catch (err: any) {
     return NextResponse.json({ error: err.message || 'Generation failed' }, { status: 500 })
