@@ -1,4 +1,5 @@
-import { createServerClient, type CookieOptions } from '@supabase/ssr'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { createClient as createSupabaseClient } from '@supabase/supabase-js'
 
@@ -9,12 +10,10 @@ export async function createClient() {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        getAll() {
-          return cookieStore.getAll()
-        },
-        setAll(cookiesToSet: { name: string; value: string; options: CookieOptions }[]) {
+        getAll: () => cookieStore.getAll(),
+        setAll: (cookiesToSet: any[]) => {
           try {
-            cookiesToSet.forEach(({ name, value, options }) =>
+            cookiesToSet.forEach(({ name, value, options }: any) =>
               cookieStore.set(name, value, options)
             )
           } catch {}
