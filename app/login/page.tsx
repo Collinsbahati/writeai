@@ -34,61 +34,31 @@ export default function LoginPage() {
   }
 
   return (
-    <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        .login-root { min-height: 100vh; background: #0a0a0f; display: flex; align-items: center; justify-content: center; font-family: 'Inter', sans-serif; padding: 24px; position: relative; overflow: hidden; }
-        .login-root::before { content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%); pointer-events: none; }
-        .login-card { width: 100%; max-width: 420px; background: #13131a; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 40px; position: relative; z-index: 1; }
-        .logo-row { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 28px; text-decoration: none; }
-        .logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: white; }
-        .logo-text { font-size: 20px; font-weight: 600; color: #fff; letter-spacing: -0.3px; }
-        .logo-text span { background: linear-gradient(135deg, #6366f1, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .login-heading { text-align: center; margin-bottom: 24px; }
-        .login-heading h1 { font-size: 22px; font-weight: 600; color: #f1f1f5; letter-spacing: -0.4px; }
-        .login-heading p { font-size: 14px; color: #6b6b80; margin-top: 6px; }
-        .google-btn { width: 100%; padding: 12px; background: #1e1e2a; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #e4e4f0; font-size: 14px; font-weight: 500; font-family: 'Inter', sans-serif; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: background 0.15s, border-color 0.15s; margin-bottom: 20px; }
-        .google-btn:hover:not(:disabled) { background: #252535; border-color: rgba(255,255,255,0.18); }
-        .google-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-        .google-icon { width: 18px; height: 18px; flex-shrink: 0; }
-        .divider { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
-        .divider-line { flex: 1; height: 1px; background: rgba(255,255,255,0.07); }
-        .divider-text { font-size: 12px; color: #44445a; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; }
-        .form-group { margin-bottom: 14px; }
-        .form-label { display: block; font-size: 13px; font-weight: 500; color: #9090a8; margin-bottom: 6px; }
-        .form-input { width: 100%; padding: 11px 14px; background: #1a1a25; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; color: #e4e4f0; font-size: 14px; font-family: 'Inter', sans-serif; transition: border-color 0.15s; outline: none; }
-        .form-input::placeholder { color: #3a3a52; }
-        .form-input:focus { border-color: rgba(99,102,241,0.5); background: #1e1e2e; }
-        .error-box { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.25); border-radius: 10px; padding: 10px 14px; font-size: 13px; color: #f87171; margin-bottom: 16px; }
-        .submit-btn { width: 100%; padding: 13px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border: none; border-radius: 12px; color: #fff; font-size: 14px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; margin-top: 6px; transition: opacity 0.15s, transform 0.1s; }
-        .submit-btn:hover:not(:disabled) { opacity: 0.92; transform: translateY(-1px); }
-        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-        .signup-link { text-align: center; margin-top: 20px; font-size: 13px; color: #5a5a72; }
-        .signup-link a { color: #818cf8; text-decoration: none; font-weight: 500; }
-        .signup-link a:hover { color: #a5b4fc; }
-        .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.6s linear infinite; margin-right: 6px; vertical-align: middle; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .forgot-link { text-align: right; margin-top: -8px; margin-bottom: 16px; }
-        .forgot-link a { font-size: 12px; color: #6060a8; text-decoration: none; }
-        .forgot-link a:hover { color: #818cf8; }
-      `}</style>
+    <div className="min-h-screen bg-gray-950 flex items-center justify-center px-4">
+      <div className="w-full max-w-md">
+        <div className="text-center mb-8">
+          <Link href="/" className="text-2xl font-bold text-indigo-400">WriteAI</Link>
+          <h1 className="text-2xl font-bold text-white mt-4">Welcome back</h1>
+          <p className="text-gray-400 mt-1">Sign in to your account</p>
+        </div>
 
-      <div className="login-root">
-        <div className="login-card">
-          <Link href="/" className="logo-row" style={{ textDecoration: 'none' }}>
-            <div className="logo-icon">W</div>
-            <span className="logo-text">Write<span>AI</span></span>
-          </Link>
+        <div className="bg-gray-900 rounded-2xl p-8 border border-gray-800 space-y-4">
+          {error && (
+            <div className="bg-red-900/30 border border-red-700 text-red-400 px-4 py-3 rounded-lg text-sm">
+              {error}
+            </div>
+          )}
 
-          <div className="login-heading">
-            <h1>Welcome back</h1>
-            <p>Sign in to your account</p>
-          </div>
-
-          <button className="google-btn" onClick={handleGoogleLogin} disabled={googleLoading || loading}>
-            {googleLoading ? <span className="spinner" /> : (
-              <svg className="google-icon" viewBox="0 0 24 24">
+          {/* Google Button */}
+          <button
+            onClick={handleGoogleLogin}
+            disabled={googleLoading || loading}
+            className="w-full flex items-center justify-center gap-3 bg-white hover:bg-gray-100 disabled:opacity-50 py-3 rounded-lg font-semibold text-gray-800 transition"
+          >
+            {googleLoading ? (
+              <span className="inline-block w-4 h-4 border-2 border-gray-400 border-t-gray-800 rounded-full animate-spin" />
+            ) : (
+              <svg width="18" height="18" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                 <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
                 <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
@@ -98,37 +68,51 @@ export default function LoginPage() {
             {googleLoading ? 'Connecting...' : 'Continue with Google'}
           </button>
 
-          <div className="divider">
-            <div className="divider-line" />
-            <span className="divider-text">or</span>
-            <div className="divider-line" />
+          <div className="flex items-center gap-3">
+            <div className="flex-1 h-px bg-gray-700" />
+            <span className="text-gray-500 text-xs uppercase tracking-wider">or</span>
+            <div className="flex-1 h-px bg-gray-700" />
           </div>
 
-          {error && <div className="error-box">{error}</div>}
-
-          <form onSubmit={handleLogin}>
-            <div className="form-group">
-              <label className="form-label">Email</label>
-              <input className="form-input" type="email" placeholder="you@example.com" value={email} onChange={e => setEmail(e.target.value)} required />
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div>
+              <label className="block text-sm text-gray-400 mb-1">Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                required
+                className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-indigo-500"
+              />
             </div>
-            <div className="form-group">
-              <label className="form-label">Password</label>
-              <input className="form-input" type="password" placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} required />
+            <div>
+              <label className="block text-sm text-gray-400 mb-1">Password</label>
+              <input
+                type="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                required
+                className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-indigo-500"
+              />
             </div>
-            <div className="forgot-link">
-              <a href="/forgot-password">Forgot password?</a>
+            <div className="text-right">
+              <a href="/forgot-password" className="text-xs text-gray-500 hover:text-indigo-400">Forgot password?</a>
             </div>
-            <button className="submit-btn" type="submit" disabled={loading || googleLoading}>
-              {loading && <span className="spinner" />}
+            <button
+              type="submit"
+              disabled={loading || googleLoading}
+              className="w-full bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 py-3 rounded-lg font-semibold text-white transition"
+            >
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
-
-          <p className="signup-link">
-            Don't have an account? <a href="/signup">Sign up free</a>
-          </p>
         </div>
+
+        <p className="text-center text-gray-400 mt-4 text-sm">
+          Don't have an account?{' '}
+          <Link href="/signup" className="text-indigo-400 hover:text-indigo-300">Sign up free</Link>
+        </p>
       </div>
-    </>
+    </div>
   )
 }
