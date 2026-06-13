@@ -11,20 +11,24 @@ export async function createClient() {
         getAll() {
           return cookieStore.getAll()
         },
-        setAll(cookiesToSet: { name: string; value: string; options?: object }[]) {
+        setAll(cookiesToSet: Array<{ name: string; value: string; options?: Record<string, unknown> }>) {
           try {
-            cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options as Parameters<typeof cookieStore.set>[2])
-            )
-          } catch {}
+            cookiesToSet.forEach(({ name, value, options }) => {
+              // @ts-ignore
+              cookieStore.set(name, value, options)
+            })
+          } catch {
+            // ignore
+          }
         },
       },
     }
   )
 }
+
 export function createServiceClient() {
-  const { createClient: createSupabaseClient } = require('@supabase/supabase-js')
-  return createSupabaseClient(
+  const { createClient: supabaseCreateClient } = require('@supabase/supabase-js')
+  return supabaseCreateClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!
   )
