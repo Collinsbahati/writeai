@@ -29,7 +29,7 @@ export default function SignupPage() {
 
   async function handleGoogle() {
     setGoogleLoading(true)
-    const { error } = await supabase.auth.signInWithOAuth({
+    const { error } = await supabase.auth.loginWithOAuth({
       provider: 'google',
       options: { redirectTo: `${window.location.origin}/auth/callback` },
     })
