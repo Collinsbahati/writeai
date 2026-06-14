@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
 
     const { content } = await req.json()
     const completion = await groq.chat.completions.create({
-      model: 'llama3-70b-8192',
+      model: 'llama-3.3-70b-versatile',
       messages: [{ role: 'user', content: `Expand and make this content significantly longer and more detailed while keeping the same tone and style:\n\n${content}` }],
       max_tokens: 2000,
     })
