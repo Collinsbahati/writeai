@@ -18,14 +18,14 @@ export default function LoginPage() {
     e.preventDefault()
     setLoading(true)
     setError('')
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
+    const { error } = await supabase.auth.loginWithPassword({ email, password })
     if (error) { setError(error.message); setLoading(false) }
     else router.push('/dashboard')
   }
 
   async function handleGoogle() {
     setGoogleLoading(true)
-    const { error } = await supabase.auth.signInWithOAuth({
+    const { error } = await supabase.auth.loginWithOAuth({
       provider: 'google',
       options: { redirectTo: `${window.location.origin}/auth/callback` },
     })
